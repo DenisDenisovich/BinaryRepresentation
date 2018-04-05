@@ -4,7 +4,7 @@ Application also can modified binary representation.
 
 * Binary representation of **unsigned char**
 
-![](https://pp.userapi.com/c847016/v847016847/1788b/WaZ039-cO1c.jpg)
+![](https://pp.userapi.com/c847016/v847016588/1810d/LZFjutBAvCQ.jpg)
 
 * Changing of binary representation 
 
@@ -12,7 +12,7 @@ Application also can modified binary representation.
 
 * Binary representation of **long double**
 
-![](https://pp.userapi.com/c847016/v847016847/178b3/ECUVVc76jMU.jpg)
+![](https://pp.userapi.com/c847016/v847016588/18106/pijNyvju8CA.jpg)
 
 * Changing of binary representation 
 
