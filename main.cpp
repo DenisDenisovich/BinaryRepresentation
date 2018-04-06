@@ -154,7 +154,7 @@ int main()
             continue;
         }
         number.arrayByte[(numberOfBit-1)/8] = ChangeByte(number.arrayByte[(numberOfBit-1)/8],(numberOfBit-1)%8,valueOfBit);
-        cout << fixed << "New value : " << number.value << endl;
+        cout << "New value : " << setiosflags(ios::left) << setw(20) << setprecision(20) << setfill('0') << number.value << endl;
         PrintDouble(number.arrayByte);
         cout << endl;
     }
