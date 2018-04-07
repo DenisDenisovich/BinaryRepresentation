@@ -2,6 +2,7 @@
 This console application display binary representation of symbol(**unsigned char**) and double precision number(**long double**).
 Application also can modified binary representation. 
 
+
 * Binary representation of **unsigned char**
 
 ![](https://pp.userapi.com/c847016/v847016588/1810d/LZFjutBAvCQ.jpg)
@@ -9,6 +10,8 @@ Application also can modified binary representation.
 * Changing of binary representation 
 
 ![](https://pp.userapi.com/c847016/v847016847/17892/PRXLLTcec9k.jpg)
+
+![](https://pp.userapi.com/c845417/v845417905/22147/0P3BlC7okbM.jpg)
 
 * Binary representation of **long double**
 
