@@ -2,6 +2,7 @@
 #include <vector>
 #include <iterator>
 #include <iomanip>
+#include <windows.h>
 
 using namespace std;
 
@@ -9,6 +10,29 @@ union lndbl{                                        //struct for storing long do
     unsigned char arrayByte[sizeof(long double)];
     long double value;
 };
+
+void setDoubleConsoleColor(int number, int selectedBit){
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); // variable for set color to console
+    int backbround;
+    int foreground;
+
+    if(selectedBit != number){
+        backbround = 0;
+    }else{
+        backbround = 6;
+    }
+
+    if(number >= 80){
+        foreground = 7;
+    }else if(number == 79){
+        foreground = 9;
+    }else if(number >= 63 && number <= 78){
+        foreground = 2;
+    }else if(number <= 62){
+        foreground = 4;
+    }
+    SetConsoleTextAttribute(hConsole, foreground + (backbround*16));
+}
 
 void PrintChar(unsigned char &a){ //function for display a binary representation of symbol
     unsigned char b;
@@ -26,7 +50,7 @@ void PrintChar(unsigned char &a){ //function for display a binary representation
     cout << endl << endl;
 }
 
-void PrintDouble(unsigned char arrayByte[sizeof(long double)]){  // function for display a binary representation of number
+void PrintDouble(unsigned char arrayByte[sizeof(long double)], int selectedBit){  // function for display a binary representation of number
 
     unsigned char arrayPrint[8];                       // array for storing displaying bits
     unsigned char byte, buffer;                        // additional variables
@@ -44,25 +68,38 @@ void PrintDouble(unsigned char arrayByte[sizeof(long double)]){  // function for
         }
         for(int j = 7; j >= 0; j--){    // display copy byte and save sign, exponent and mantissa
             counterBit--;
-            cout << (int)arrayPrint[j];
-            if(counterBit == 79){                            // save signed bit
+            if(counterBit >= 80){
+                setDoubleConsoleColor(counterBit, selectedBit);
+                cout << (int)arrayPrint[j];
+            }else if(counterBit == 79){                            // save signed bit
                 sign = (int)arrayPrint[j];
-            }else if(counterBit <= 78 && counterBit >= 64){  // save bits of exponent
+                setDoubleConsoleColor(counterBit, selectedBit);
+                cout << (int)arrayPrint[j];
+            }else if(counterBit >= 63 && counterBit <= 78){  // save bits of exponent
                 arrayExponent.insert(arrayExponent.end(),(int)arrayPrint[j]);
-            }else if(counterBit <= 63){                      // save bits of mantissa
+                setDoubleConsoleColor(counterBit, selectedBit);
+                cout << (int)arrayPrint[j];
+            }else if(counterBit <= 62){                      // save bits of mantisa
                 arrayMantis.insert(arrayMantis.end(),(int)arrayPrint[j]);
+                setDoubleConsoleColor(counterBit, selectedBit);
+                cout << (int)arrayPrint[j];
            }
         }
-        if(i == 10)
+        if(i == 10){
             cout << " ";
+        }
     }
+    setDoubleConsoleColor(79, -1);
     cout << endl;                       // display sign, exponent and mantissa
-    cout << "Sign - " << (int)sign << endl;
+    cout << "Sign     - " << (int)sign << endl;
+    setDoubleConsoleColor(78, -1);
     cout << "Exponent - ";
     copy(arrayExponent.begin(), arrayExponent.end(), ostream_iterator<int>(cout,""));
-    cout << endl << "Mantis - ";
+    setDoubleConsoleColor(62, -1);
+    cout << endl << "Mantis   - ";
     copy(arrayMantis.begin(), arrayMantis.end(), ostream_iterator<int>(cout,""));
     cout << endl;
+    setDoubleConsoleColor(80, -1);
 }
 unsigned char revers(unsigned char &a){ // function for save bits on reverse sequence
     unsigned char rev;   // variable for save resulting sequence
@@ -137,10 +174,11 @@ int main()
 
 
     cout << endl << "              LONG DOUBLE" << endl;
-    cout << "Inter value: ";
+    cout << "Inter value:  ";
     cin >> number.value;
+    cout << "19 precision: " << setiosflags(ios::left) << fixed << setprecision(19) << number.value << endl;
     cout << endl;
-    PrintDouble(number.arrayByte);
+    PrintDouble(number.arrayByte, -1);
     cout << endl;
     while(numberOfBit != -1){
         cout << "Inter a number of changed bit( for EXIT (-1) ): ";
@@ -154,8 +192,8 @@ int main()
             continue;
         }
         number.arrayByte[(numberOfBit-1)/8] = ChangeByte(number.arrayByte[(numberOfBit-1)/8],(numberOfBit-1)%8,valueOfBit);
-        cout << "New value : " << setiosflags(ios::left) << setw(20) << setprecision(20) << setfill('0') << number.value << endl;
-        PrintDouble(number.arrayByte);
+        cout << "New value :   " << setiosflags(ios::left) << fixed << setprecision(19) << number.value << endl;
+        PrintDouble(number.arrayByte, numberOfBit - 1);
         cout << endl;
     }
 
