@@ -12,9 +12,9 @@ Application also can modified binary representation.
 
 * Binary representation of **long double**
 
-![](https://pp.userapi.com/c834400/v834400582/10ba0f/Uf3LlpRR8Y0.jpg)
+![](https://pp.userapi.com/c845321/v845321765/21ba6/lXwHv0a2LnE.jpg)
 
 * Changing of binary representation 
 
-![](https://pp.userapi.com/c834400/v834400582/10ba17/Y8Au2zlYy3A.jpg)
+![](https://pp.userapi.com/c845321/v845321765/21bae/KgHAT0csZso.jpg)
 
